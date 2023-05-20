@@ -24,6 +24,10 @@ const PWAMeta = () => {
         content="black-translucent"
       />
       <meta name="apple-mobile-web-app-title" content="MuseSync" />
+      <meta
+        name="viewport"
+        content="viewport-fit=cover, user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+      ></meta>
       <meta name="description" content="MuseSync PWA" />
       <meta name="format-detection" content="telephone=no" />
       <meta name="mobile-web-app-capable" content="yes" />
