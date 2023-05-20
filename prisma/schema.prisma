@@ -2,17 +2,41 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider        = "mysql"
-    url             = env("DATABASE_URL")
-    relationMode    = "prisma"
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Song {
+  id        String      @id @default(cuid())
+  charts    Chart[]
+  updatedAt DateTime    @updatedAt
+}
+
+model Chart {
+  id        String   @id @default(cuid())
+  song      Song     @relation(fields: [songId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  data      Json
+  authorId  String
+  songId    String
+  playlists Playlist[]
+
+  @@index([songId])
+}
+
+model Playlist {
+  id      String  @id @default(cuid())
+  charts  Chart[]
 }
